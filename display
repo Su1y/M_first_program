@@ -186,11 +186,11 @@ void changescore(int i)
 		if (b == 1)
 		{
 			system("cls");
-			changescore();
+			changescore(i);
 		}
 	}
 	stud clastud[4][50];
-
+	cout<<"请依次输入"
 }
 int main()
 {
