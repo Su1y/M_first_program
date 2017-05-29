@@ -258,7 +258,8 @@ void display2_teacher()
 void checkscore(int i ,int p)
 {
 	stud clastud[4][50];
-	ofstream outfile("stud.dat",ios::binary);
+	fstream outfile;
+	outfile.open("stud.dat",ios::in|ios::out|ios::binary);
 	if(clastud[i-211][p-1].score>=0&&clastud[i-211][p-1].score<=20)
 	{
 		cout<<clastud[i-211][p-1].score;
@@ -272,14 +273,15 @@ void checkscore(int i ,int p)
 void changescore(int i,int p)
 {
 
-	ofstream outfile("stud.dat",ios::binary);
+	fstream outfile;
+	outfile.open("stud.dat",ios::in|ios::out|ios::binary);
 	stud clastud[4][50];
 	cout<<"请依次输入学生的课堂提问次数、点名次数、交作业次数、看手机次数和迟到次数。"<<endl;
 	clastud[i-211][p-1].cscore();
 	cout<<"请依次输入学生的上机程序抽查次数、点名次数、上交实验报告次数、玩游戏次数、迟到次数。"<<endl;
 	clastud[i-211][p-1].pcdisplay();
 	clastud[i-211][p-1].summ();
-	if(clastud[i-211][p-1].score<0)
+	if(clastud[i -211][p-1].score<0)
 	{
 		int b ;
 		b=error();
@@ -291,7 +293,8 @@ void changescore(int i,int p)
 	}
 	else
 	{
-		outfile.write((char*)&clastud[i][p],sizeof(clastud[i][p]));
+		outfile.write((char*)&clastud[i-2111][p-1],sizeof(clastud[i-211][p-1]));
+		cout<<clastud[i-211][p-1].score;
 		outfile.close();
 	}
 
