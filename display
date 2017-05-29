@@ -1,29 +1,62 @@
-/*
-
-
-效果
-==================================================================================
-==                                                                              ==
-==                                                                              ==
-==                                 成绩查询系统                                 ==
-==                                                                              ==
-==                                                                              ==
-==                                                                              ==
-==                                                                              ==
-==                                                                              ==
-==                                                                              ==
-==                                                                              ==
-==                                                                              ==
-==           学生入口请按S                                教师入口请按T         ==
-==                                                                              ==
-==                                                                              ==
-==                                                                              ==
-==                                                                              ==
-==                                                                              ==
-==                                                               made by suiy   ==
-==================================================================================
-*/
-
+#include <iostream>
+#include <fstream>
+#include <dos.h>
+#include <string>
+using namespace std;
+int error()
+{
+	system("cls");
+	char a;
+	cout << "错误，请按Q返回先前菜单或按Z返回主页面"<<endl;
+	cin >> a;
+	if (a == 'Q' || a == 'q')
+		return 1;
+	else if (a =='Z' || a == 'z')
+	{
+		system("cls");
+		void display_1();
+		void entersystem();
+		display_1();
+		entersystem();
+	}
+	else
+		error();
+}
+class class_score
+{
+public:
+	int question=q, call=c, homework=h, playmp=p, late=l;
+	int sum1;
+	void cscore();
+private:
+	int q, c, h, p, l;
+};
+void class_score::cscore()
+{
+	cin >> q >> c >> h >> p >> l;
+	sum1 = q + c + h - p - l;
+}
+class practice_core
+{
+public:
+	int program=p, call=c, homework=h, game=g, late=l;
+	int sum;
+	void pcdisplay();
+private:
+	int p, c, h, g, l;
+};
+void practice_core::pcdisplay()
+{
+	cin >> p >> c >> h >> g >> l;
+	sum = p + c + h - g - l;
+}
+class stud :public class_score, public practice_core
+{
+public:
+	int score = s;
+private:
+	int s=sum1+sum;
+};
 void display_1()
 {
 
@@ -40,5 +73,127 @@ void display_1()
 		else
 			cout << "==                                                                              ==" << endl;
 	}
+}
+void entersystem()
+{
+	char a;
+	cin >> a;
+	if (a == 'S' || a == 's')
+	{
+		system("cls");
+		void display_stud();
+		display_stud();
+	}
+	else if (a == 'T' || a == 't')
+	{
+		system("cls");
+		void display_teacher();
+		display_teacher();
+	}
+	else
+	{
+		int b;
+		b = error();
+		if (b == 1)
+		{
+			system("cls");
+			display_1();
+			entersystem();
+		}
+	}
+}
+void display_stud()
+{
+	cout << "请输入要查询的学号:";
+}
+void display_teacher()
+{
+	string a = "admin";
+	string user, password;
+	cout<<"请输入登陆账号和密码:"<<endl<<"user:";
+	cin >> user;
+	cout << "password:";
+	cin >> password;
+	if (user == password&&user == a)
+	{
+		void display2_teacher();
+		display2_teacher();
+	}
+	else
+	{
+		int b;
+		b = error();
+		if (b == 1)
+		{
+			system("cls");
+			display_teacher();
+		}
+	}
+}
+void display2_teacher()
+{
+	char a;
+	system("cls");
+	cout << "按C查询学生成绩，按P更改学生成绩" << endl;
+	cin >> a;
+	if (a == 'c' || a == 'C')
+	{
 
+	}
+	else if (a == 'P' || a == 'p')
+	{	
+		int i;
+		system("cls");
+		cout << "请输入要更改的班级:";
+		cin >> i;
+		if (i > 214 || i < 211)
+		{
+			int b;
+			b = error();
+			if (b == 1)
+			{
+				system("cls");
+				display2_teacher();
+			}
+		}
+		void changescore(int i);
+		changescore(i);
+	}
+	else
+	{
+		int b;
+		b = error();
+		if(b==1)
+		{
+			system("cls");
+			display2_teacher();
+		}
+	}
+}
+void checkscore()
+{
+
+}
+void changescore(int i)
+{
+	int p;
+	cout << "请输入要更改的学号:";
+	cin >> p;
+	if (p < 1 || p>50)
+	{
+		int b;
+		b = error();
+		if (b == 1)
+		{
+			system("cls");
+			changescore();
+		}
+	}
+	stud clastud[4][50];
+
+}
+int main()
+{
+	display_1();
+	entersystem();
 }
