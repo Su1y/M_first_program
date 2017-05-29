@@ -25,7 +25,7 @@ int error()
 class class_score
 {
 public:
-	int question=q, call=c, homework=h, playmp=p, late=l;
+	int question, call, homework, playmp, late;
 	int sum1;
 	void cscore();
 private:
@@ -34,12 +34,17 @@ private:
 void class_score::cscore()
 {
 	cin >> q >> c >> h >> p >> l;
+	question=q;
+	call=c;
+	homework=h;
+	playmp=p;
+	late=l;
 	sum1 = q + c + h - p - l;
 }
 class practice_core
 {
 public:
-	int program=p, call=c, homework=h, game=g, late=l;
+	int program, call, homework, game, late;
 	int sum;
 	void pcdisplay();
 private:
@@ -48,15 +53,26 @@ private:
 void practice_core::pcdisplay()
 {
 	cin >> p >> c >> h >> g >> l;
+	program=p;
+	call=c; 
+	homework=h; 
+	game=g;
+	late=l;
 	sum = p + c + h - g - l;
 }
 class stud :public class_score, public practice_core
 {
 public:
-	int score = s;
+	int score;
+	void summ();
 private:
-	int s=sum1+sum;
+	int s;
 };
+void stud::summ()
+{
+	s=sum1+sum;
+	score=s;
+}
 void display_1()
 {
 
@@ -104,7 +120,35 @@ void entersystem()
 }
 void display_stud()
 {
-	cout << "请输入要查询的学号:";
+		int i=0;
+		system("cls");
+		cout << "请输入要查询的班级:";
+		cin >> i;
+		if (i > 214 || i < 211)
+		{
+			int b;
+			b = error();
+			if (b == 1)
+			{
+				system("cls");
+				display_stud();
+			}
+		}
+		int p=0;
+		cout << "请输入要查询的学号:";
+		cin >> p;
+		if (p < 1 || p>50)
+		{
+			int b;
+			b = error();
+			if (b == 1)
+			{
+				system("cls");
+				display_stud();
+			}
+		}
+			void checkscore(int i,int p);
+			checkscore(i,p);
 }
 void display_teacher()
 {
@@ -138,11 +182,39 @@ void display2_teacher()
 	cin >> a;
 	if (a == 'c' || a == 'C')
 	{
-
+		int i=0;
+		system("cls");
+		cout << "请输入要查询的班级:";
+		cin >> i;
+		if (i > 214 || i < 211)
+		{
+			int b;
+			b = error();
+			if (b == 1)
+			{
+				system("cls");
+				display2_teacher();
+			}
+		}
+		int p=0;
+		cout << "请输入要查询的学号:";
+		cin >> p;
+		if (p < 1 || p>50)
+		{
+			int b;
+			b = error();
+			if (b == 1)
+			{
+				system("cls");
+				display2_teacher();
+			}
+		}
+			void checkscore(int i,int p);
+			checkscore(i,p);
 	}
 	else if (a == 'P' || a == 'p')
 	{	
-		int i;
+		int i=0;
 		system("cls");
 		cout << "请输入要更改的班级:";
 		cin >> i;
@@ -156,8 +228,21 @@ void display2_teacher()
 				display2_teacher();
 			}
 		}
-		void changescore(int i);
-		changescore(i);
+		int p=0;
+		cout << "请输入要更改的学号:";
+		cin >> p;
+		if (p < 1 || p>50)
+		{
+			int b;
+			b = error();
+			if (b == 1)
+			{
+				system("cls");
+				display2_teacher();
+			}
+		}
+			void changescore(int i,int p);
+			changescore(i,p);
 	}
 	else
 	{
@@ -170,30 +255,50 @@ void display2_teacher()
 		}
 	}
 }
-void checkscore()
+void checkscore(int i ,int p)
 {
+	stud clastud[4][50];
+	ofstream outfile("stud.dat",ios::binary);
+	if(clastud[i-211][p-1].score>=0&&clastud[i-211][p-1].score<=20)
+	{
+		cout<<clastud[i-211][p-1].score;
+	}
+	else
+	{
+		cout<<"暂无此学生信息"<<endl;
+	}
 
 }
-void changescore(int i)
+void changescore(int i,int p)
 {
-	int p;
-	cout << "请输入要更改的学号:";
-	cin >> p;
-	if (p < 1 || p>50)
+
+	ofstream outfile("stud.dat",ios::binary);
+	stud clastud[4][50];
+	cout<<"请依次输入学生的课堂提问次数、点名次数、交作业次数、看手机次数和迟到次数。"<<endl;
+	clastud[i-211][p-1].cscore();
+	cout<<"请依次输入学生的上机程序抽查次数、点名次数、上交实验报告次数、玩游戏次数、迟到次数。"<<endl;
+	clastud[i-211][p-1].pcdisplay();
+	clastud[i-211][p-1].summ();
+	if(clastud[i-211][p-1].score<0)
 	{
-		int b;
-		b = error();
-		if (b == 1)
+		int b ;
+		b=error();
+		if(b==1)
 		{
 			system("cls");
-			changescore(i);
+			changescore(i,p);
 		}
 	}
-	stud clastud[4][50];
-	cout<<"请依次输入"
+	else
+	{
+		outfile.write((char*)&clastud[i][p],sizeof(clastud[i][p]));
+		outfile.close();
+	}
+
 }
 int main()
 {
 	display_1();
 	entersystem();
+	return 0;
 }
