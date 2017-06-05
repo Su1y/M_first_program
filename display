@@ -11,7 +11,7 @@ int error()
 	cin >> a;
 	if (a == 'Q' || a == 'q')
 		return 1;
-	else if (a == 'p' || a == 'P')
+	else if (a == 'Z' || a == 'z')
 	{
 		system("cls");
 		void display_1();
@@ -264,20 +264,18 @@ void checkscore(int i, int p)
 	outfile.read((char*)&clastud[i - 211][p - 1], sizeof(clastud[i - 211][p - 1]));
 	if (clastud[i - 211][p - 1].score >= 0 && clastud[i - 211][p - 1].score <= 20)
 	{
-		cout << "此学生成绩为:"<<clastud[i - 211][p - 1].score << endl<<endl<<endl;
-		cout << "继续查询学生成绩请按C,退出程序请按Z,回到主页面请按P"<<endl;
+		cout << "此学生成绩为:" << clastud[i - 211][p - 1].score << endl << endl << endl;
+		cout << "继续查询学生成绩请按C" << endl;
 		cin >> a;
-		if (a == 'C' || 'c')
+		if (a == 'c' || 'C')
 		{
+			system("cls");
 			display_stud();
 		}
-		else if (a == 'Z' || a == 'z')
+		else if (a == 'P' || 'p')
 		{
-			exit(0);
-		}
-		else if (a == 'P' || a == 'p')
-		{
-			entersystem();
+			system("cls");
+
 		}
 		else
 		{
@@ -307,7 +305,7 @@ void changescore(int i, int p)
 	cout << "请依次输入学生的上机程序抽查次数、点名次数、上交实验报告次数、玩游戏次数、迟到次数。" << endl;
 	clastud[i - 211][p - 1].pcdisplay();
 	clastud[i - 211][p - 1].summ();
-	if (clastud[i - 211][p - 1].score<0||clastud[i-211][p-1].score>20)
+	if (clastud[i - 211][p - 1].score<0 || clastud[i - 211][p - 1].score>20)
 	{
 		int b;
 		b = error();
@@ -320,7 +318,7 @@ void changescore(int i, int p)
 	else
 	{
 		outfile.write((char*)&clastud[i - 211][p - 1], sizeof(clastud[i - 211][p - 1]));
-		cout << "此学生的成绩是:" << clastud[i - 211][p - 1].score << endl << "继续更改学生成绩请按P,退出程序请按Z。"<<endl;
+		cout << "此学生的成绩是:" << clastud[i - 211][p - 1].score << endl << "继续更改学生成绩请按P,退出程序请按Z。" << endl;
 	}
 	outfile.close();
 	cin >> a;
@@ -328,7 +326,7 @@ void changescore(int i, int p)
 	{
 		exit(0);
 	}
-	else if(a=='P'||a=='p')
+	else if (a == 'P' || a == 'p')
 	{
 		int i = 0;
 		system("cls");
